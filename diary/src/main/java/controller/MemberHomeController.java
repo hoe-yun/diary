@@ -2,18 +2,24 @@ package controller;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.ScheduleDao;
+import vo.Member;
 
 @WebServlet("/member/memberHome")
 public class MemberHomeController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
+		
 		// session 유효성 검사
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") == null) {
@@ -21,7 +27,8 @@ public class MemberHomeController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/member/loginMember");
 			return;
 		}
-		*/
+		
+		
 		// 달력에 출력하는데 필요한 모델
 			// 1) 출력하고자 하는 년/월/1일
 			Calendar firstD = Calendar.getInstance();
@@ -51,12 +58,21 @@ public class MemberHomeController extends HttpServlet {
 			// 5) 전체 TD의 개수
 			int totalTd = beginBlank + lastD + endBlank;
 			
+			// schedule model
+			ScheduleDao scheduleDao = new ScheduleDao();
+			//param : String 로그인아이디, int 출력 연도, int 출력 월
+			Member paramMember = (Member)session.getAttribute("loginMember");
+			String paramMemberId = paramMember.getMemberId();
+			List<Map<String, Object>> list = scheduleDao.selelctScheduleByMonth(paramMemberId,targetY ,targetM );
+			System.out.println(list.size()+"<--");
 			request.setAttribute("targetY", targetY);
 			request.setAttribute("targetM", targetM);
 			request.setAttribute("lastD", lastD);
 			request.setAttribute("beginBlank", beginBlank);
 			request.setAttribute("endBlank", endBlank);
 			request.setAttribute("totalTd", totalTd);
+			
+			request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/view/member/memberHome.jsp").forward(request, response);
 	}
 

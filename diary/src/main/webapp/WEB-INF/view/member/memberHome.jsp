@@ -19,7 +19,7 @@
 		</div>
 		<div align="center">
 			<a href="${pageContext.request.contextPath}/member/logoutMember" class="btn btn-outline-dark">로그아웃</a>
-			<a href="${pageContext.request.contextPath}/member/modifyPwMember" class="btn btn-outline-dark">비밀번호수정</a>
+			<a href="${pageContext.request.contextPath}/member/modifyMember" class="btn btn-outline-dark">비밀번호수정</a>
 			<a href="${pageContext.request.contextPath}/member/removeMember" class="btn btn-outline-dark">회원탈퇴</a>
 		</div>
 		<br><br>
@@ -53,20 +53,28 @@
 				</tr>
 				<tr>
 					<c:forEach var="i" begin="1" end="${totalTd}" step="1">
+						<c:set var="d" value="${i - beginBlank }"></c:set>
 						<c:if test="${i % 7 == 1}">
 							<td style="color:red">
 						</c:if>
 						<c:if test="${!(i % 7 == 1)}">
 							<td>
 						</c:if>
-							<c:if test="${(i - beginBlank) < 1 || (i - beginBlank) > lastD}">
+							<c:if test="${d < 1 || d > lastD}">
 								&nbsp;
 							</c:if>
-							<c:if test="${!((i - beginBlank) < 1 || (i - beginBlank) > lastD)}">
-								${i - beginBlank}<br>
-								<a href="">&nbsp;</a>
+							<c:if test="${!(d < 1 || d > lastD)}">
+								${d}
+								<a href="${pageContext.request.contextPath}/schedule/scheduleByDay?targetY=${targetY}&targetM=${targetM+1}&targetD=${d}" style="float:right">자세히</a><br><br>
+								<div>
+									<c:forEach var="m" items="${list }">
+										<c:if test="${m.scheduleDay == d }">
+											<div><p class="text-dark">${m.cnt }개 의 일정</p></div>
+											<div><p class="text-dark">${m.memo }</p></div>
+										</c:if>
+									</c:forEach>
+								</div>
 							</c:if>
-							
 							<c:if test="${i<totalTd && i%7==0}">
 								</tr><tr>
 							</c:if>

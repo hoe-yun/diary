@@ -32,9 +32,9 @@ public class ScheduleListByDayController extends HttpServlet {
 		
 		//타켓 연,월,날짜 받기
 		int targetY = Integer.parseInt(request.getParameter("targetY"));
-		int targetM= Integer.parseInt(request.getParameter("targetM"));
+		int targetM = Integer.parseInt(request.getParameter("targetM"));
 		int targetD = Integer.parseInt(request.getParameter("targetD"));
-		//타켓 연 월 날짜를 yyyy-MM-dd 형식(LocalDate 타입)으로 바꿈
+		//타켓 연 월 날짜를 yyyy-MM-dd 형식(LocalDate 타입)으로 합침
 		LocalDate date = LocalDate.of(targetY, targetM, targetD);
 		//LocalDate 타입을 String으로
 		String scheduleDate = date.toString();

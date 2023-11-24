@@ -6,6 +6,13 @@ public class Schedule {
 	private String scheduleDate;
 	private String scheduleMemo;
 	private String createdate;
+	private String scheduleEmoji;
+	public String getScheduleEmoji() {
+		return scheduleEmoji;
+	}
+	public void setScheduleEmoji(String scheduleEmoji) {
+		this.scheduleEmoji = scheduleEmoji;
+	}
 	public int getScheduleNo() {
 		return scheduleNo;
 	}
@@ -39,6 +46,8 @@ public class Schedule {
 	@Override
 	public String toString() {
 		return "Schedule [scheduleNo=" + scheduleNo + ", memberId=" + memberId + ", scheduleDate=" + scheduleDate
-				+ ", scheduleMemo=" + scheduleMemo + ", createdate=" + createdate + "]";
+				+ ", scheduleMemo=" + scheduleMemo + ", createdate=" + createdate + ", scheduleEmoji=" + scheduleEmoji
+				+ "]";
 	}
+	
 }

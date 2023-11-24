@@ -66,14 +66,14 @@
 							<c:if test="${!(d < 1 || d > lastD)}">
 								${d}
 								<a href="${pageContext.request.contextPath}/schedule/scheduleByDay?targetY=${targetY}&targetM=${targetM+1}&targetD=${d}" style="float:right">자세히</a><br><br>
+								<div align="center" class="d-grid gap-1"><button class="btn btn-outline-success btn-block">일정 : 0</button></div>
+								<c:forEach var="m" items="${list }">
 								<div>
-									<c:forEach var="m" items="${list }">
-										<c:if test="${m.scheduleDay == d }">
-											<div><p class="text-dark">${m.cnt }개 의 일정</p></div>
-											<div><p class="text-dark">${m.memo }</p></div>
-										</c:if>
-									</c:forEach>
+									<c:if test="${m.scheduleDay == d }">
+										<div align="center" class="d-grid"><button class="btn btn-outline-success btn-block" data-bs-toggle="tooltip" title="${m.memo }">일정 : ${m.cnt}</button></div>
+									</c:if>
 								</div>
+								</c:forEach>
 							</c:if>
 							<c:if test="${i<totalTd && i%7==0}">
 								</tr><tr>

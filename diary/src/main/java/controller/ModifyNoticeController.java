@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.NoticeDao;
+import vo.Member;
 import vo.Notice;
 
 @WebServlet("/notice/modifyNotice")
@@ -43,6 +44,31 @@ public class ModifyNoticeController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/member/loginMember");
 			return;
 		}
+		// modifyNotice.jsp에서 받는 값 출력
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		String noticeTitle = request.getParameter("noticeTitle");
+		String noticeContent = request.getParameter("noticeContent");
+		String noticePw = request.getParameter("noticePw");
+		System.out.println(noticeTitle+" <-- 왜 깨지냐");
+		// session에서 memberId 출력
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		String loginId = loginMember.getMemberId();
+		
+		//NoticeDao에서 update메소드 호출 후 값 삽입
+		NoticeDao noticeDao = new NoticeDao();
+		Notice paramNotice = new Notice();
+		paramNotice.setNoticeNo(noticeNo);
+		paramNotice.setNoticeTitle(noticeTitle);
+		paramNotice.setNoticeContent(noticeContent);
+		paramNotice.setNoticePw(noticePw);
+		paramNotice.setMemberId(loginId);
+		int row = noticeDao.updateNotice(paramNotice);
+		if(row == 0) {
+			System.out.println("수정실패");
+		}else {
+			System.out.println("수정성공");
+		}
+		response.sendRedirect(request.getContextPath()+"/notice/noticeOne?noticeNo="+noticeNo+"&currentPage=1");
 	}
 
 }

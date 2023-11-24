@@ -201,18 +201,20 @@ public class NoticeDao {
 					""";
 			stmt1 = conn.prepareStatement(sql1);
 			stmt1.setString(1, notice.getMemberId());
+			System.out.println(stmt1 + " <-- stmt1");
 			rs = stmt1.executeQuery();
 			Member m = new Member();
 			if(rs.next()) {
 				m.setMemberLevel(rs.getInt("memberLevel"));
 			}
+			System.out.println(m.getMemberLevel()+" <-level");
 			if(m.getMemberLevel() != 0) {
 				String sql = """
-						UPDATE schedule SET
+						UPDATE notice SET
 							notice_title = ?,
-							notiece_content = ?
+							notice_content = ?
 						WHERE notice_no = ?
-						AND notice_pw = ?
+						AND notice_pw = PASSWORD(?)
 				""";
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, notice.getNoticeTitle());

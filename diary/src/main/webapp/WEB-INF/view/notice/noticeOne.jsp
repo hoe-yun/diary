@@ -51,10 +51,10 @@
 					${currentPage+1}
 				</c:if>
 				" style="float:right" class="btn btn-outline-dark">다음 공지</a>
-		</div><br><br><br><br>
+		</div><br><br>
 	<fieldset class="border" style="background-color:#D4F4FA">
 		<legend><div align="center">
-			<h1>${paramNotice.getNoticeTitle() }</h1>
+			<br><h1>${paramNotice.getNoticeTitle() }</h1>
 		</div></legend>
 		<div align="right">
 			<h5>작성일 : ${paramNotice.getCreatedate() }</h5>

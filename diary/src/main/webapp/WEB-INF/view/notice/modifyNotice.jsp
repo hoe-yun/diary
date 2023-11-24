@@ -14,7 +14,7 @@
 <body>
 	<div class="container" align="center">
 		<br><br><div><h1>공지 수정</h1></div><br><br>
-		<form action="${pageContext.request.contextPath}/notice/modifyNotice" method="post" id="">
+		<form action="${pageContext.request.contextPath}/notice/modifyNotice" method="post" id="" accept-charset="utf-8">
 			<table class="table col-lg-12">
 				<tr align="center">
 					<th class="table-info"><br><br><br>공지 번호<br><br><br><br></th>
@@ -35,7 +35,7 @@
 			</table>
 			<button id="" class="btn btn-outline-dark" style="float:right">수정</button>
 		</form>
-		<a href="" class="btn btn-outline-dark" style="float:left">뒤로</a>
+		<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${paramNotice.getNoticeNo() }&currentPage=1" class="btn btn-outline-dark" style="float:left">뒤로</a>
 	</div>
 </body>
 </html>

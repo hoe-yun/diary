@@ -59,7 +59,7 @@ public class MemberDao {
 			//conn 디버깅
 			System.out.println(conn+" <--conn");
 			
-			String sql = "SELECT member_no memberNo,member_id memberId FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
+			String sql = "SELECT member_no memberNo,member_id memberId, member_level memberLevel FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, paramMember.getMemberId());
 			stmt.setString(2, paramMember.getMemberPw());
@@ -67,6 +67,7 @@ public class MemberDao {
 			while(rs.next()) {
 				resultMember.setMemberNo(rs.getInt("memberNo"));
 				resultMember.setMemberId(rs.getString("memberId"));
+				resultMember.setMemberLevel(rs.getInt("memberLevel"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -47,7 +47,7 @@ public class LoginMemberController extends HttpServlet {
 		
 		Member resultMember = memberDao.loginMember(paramMember);
 		
-		if(resultMember == null) {
+		if(resultMember.getMemberId() == null) {
 			response.sendRedirect(request.getContextPath()+"/member/loginMember");
 			return;
 		}

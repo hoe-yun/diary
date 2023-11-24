@@ -153,7 +153,8 @@ public class NoticeDao {
 					""";
 			stmt= conn.prepareStatement(sql);
 			stmt.setObject(1, paramMap.get("beginRow"));
-			stmt.setObject(2, paramMap.get("rowPerpage"));
+			stmt.setObject(2, paramMap.get("rowPerPage"));
+			System.out.println(stmt+" <-- stmt noticeList");
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Notice n = new Notice();
@@ -293,6 +294,42 @@ public class NoticeDao {
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	public int noticeCNT() {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			//톰캣 context.xml 설정 로드
+			Context context = new InitialContext();
+			//context.xml 커넥션 풀 객체 로드
+			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/diary");
+			conn = ds.getConnection();
+			//conn 디버깅
+			System.out.println(conn+" <--conn");
+			
+			String sql = """
+					SELECT COUNT(*)
+					FROM notice
+					""";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				row = rs.getInt("COUNT(*)");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				
 			}
 		}
 		return row;

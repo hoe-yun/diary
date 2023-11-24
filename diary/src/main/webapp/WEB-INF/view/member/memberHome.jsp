@@ -12,7 +12,45 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<br><br>
 	<div class="container">
+		<div align="center">
+			<table class="table table-bordered col-lg-12">
+				<tr align="center" class="table table-info">
+					<th class="col-lg-2">공지 번호</th>
+					<th class="col-lg-8">공지 제목</th>
+					<th class="col-lg-2">공지 날짜</th>
+				</tr>
+					<c:forEach var="n" items="${noticeList }">
+						<tr align="center">
+							<td>${n.getNoticeNo()}</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${n.getNoticeNo()}">${n.getNoticeTitle()}</a>
+							</td>
+							<td>${n.getCreatedate()}</td>
+						</tr>
+					</c:forEach>
+			</table>
+		</div>
+		<div align="center">
+			<a href="${pageContext.request.contextPath}/member/memberHome?currentPage=
+				<c:if test="${(currentPage-1)<1}">
+					${currentPage}
+				</c:if>
+				<c:if test="${!((currentPage-1)<1)}">
+					${currentPage-1}
+				</c:if>
+				" style="float:left" class="btn btn-outline-dark">이전 공지</a>
+			<a href="" class="btn btn-outline-dark">${currentPage}</a>
+			<a href="${pageContext.request.contextPath}/member/memberHome?currentPage=
+				<c:if test="${(currentPage+1)>lastPage}">
+					${currentPage}
+				</c:if>
+				<c:if test="${!((currentPage+1)>lastPage)}">
+					${currentPage+1}
+				</c:if>
+				" style="float:right" class="btn btn-outline-dark">다음 공지</a>
+		</div><br>
 		<div align="center">
 			<h1>Home</h1><br>
 			<h1>ID : ${loginMember.memberId}</h1><br>

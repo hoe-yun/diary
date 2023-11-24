@@ -49,7 +49,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>
+							<td><br>
 								<input type="radio" name="emoji" value="&#1F4DD;"><span>&#128110;</span>
 								<input type="radio" name="emoji" value="&#128186;">&#128186;
 								<input type="radio" name="emoji" value="&#127981;">&#127981;
@@ -57,7 +57,7 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				</form><br>
 		</fieldset>
 	</div>
 </div>

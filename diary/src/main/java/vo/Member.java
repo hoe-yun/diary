@@ -1,10 +1,11 @@
 package vo;
 
 public class Member {
-	int memberNo;
-	String memberId;
-	String memberPw;
-	String createdate;
+	private int memberNo;
+	private String memberId;
+	private String memberPw;
+	private String createdate;
+	private int memberLevel;
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -29,10 +30,16 @@ public class Member {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
+	public int getMemberLevel() {
+		return memberLevel;
+	}
+	public void setMemberLevel(int memberLevel) {
+		this.memberLevel = memberLevel;
+	}
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", createdate="
-				+ createdate + "]";
+				+ createdate + ", memberLevel=" + memberLevel + "]";
 	}
 	
 	

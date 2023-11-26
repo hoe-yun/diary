@@ -39,11 +39,13 @@ public class NoticeDao {
 					""";
 			stmt1 = conn.prepareStatement(sql1);
 			stmt1.setString(1, notice.getMemberId());
+			System.out.println(stmt1 + " <-- stmt1");
 			rs = stmt1.executeQuery();
 			Member m = new Member();
 			if(rs.next()) {
 				m.setMemberLevel(rs.getInt("memberLevel"));
 			}
+			System.out.println(m.getMemberLevel() + "   <-----level");
 			if(m.getMemberLevel() != 0) {
 				String sql = """
 						INSERT INTO notice(
@@ -66,12 +68,13 @@ public class NoticeDao {
 				}else {
 					System.out.println("추가 실패");
 				}
+				stmt.close();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			try {
-				stmt.close();
+				stmt1.close();
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -69,7 +69,7 @@
 			<a href="${pageContext.request.contextPath}/member/memberHome" class="btn btn-outline-dark btn-light">홈으로</a>
 			<c:if test="${loginLevel != 0 }">
 				<a href="${pageContext.request.contextPath}/notice/modifyNotice?noticeNo=${paramNotice.getNoticeNo()}" class="btn btn-outline-dark btn-light">수정</a> 
-				<a href="" class="btn btn-outline-danger btn-light">삭제</a> 
+				<a href="${pageContext.request.contextPath}/notice/removeNotice?noticeNo=${paramNotice.getNoticeNo()}" class="btn btn-outline-danger btn-light">삭제</a> 
 			</c:if>
 		</div>
 		<div align="right">

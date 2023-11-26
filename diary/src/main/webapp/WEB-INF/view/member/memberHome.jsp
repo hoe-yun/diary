@@ -56,6 +56,7 @@
 			<h1>ID : ${loginMember.memberId}</h1><br>
 		</div>
 		<div align="center">
+			<a href="${pageContext.request.contextPath}/notice/addNotice" class="btn btn-outline-dark">공지추가</a>
 			<a href="${pageContext.request.contextPath}/member/logoutMember" class="btn btn-outline-dark">로그아웃</a>
 			<a href="${pageContext.request.contextPath}/member/modifyMember" class="btn btn-outline-dark">비밀번호수정</a>
 			<a href="${pageContext.request.contextPath}/member/removeMember" class="btn btn-outline-dark">회원탈퇴</a>

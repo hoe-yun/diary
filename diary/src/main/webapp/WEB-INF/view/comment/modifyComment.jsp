@@ -30,11 +30,11 @@
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="commentNo" value="${comment.getCommentNo() }">
-		<input type="hidden" name="noticeNo" value="${comment.getNoticeNo() }">
+		<input type="text" name="commentNo" value="${comment.getCommentNo() }">
+		<input type="text" name="noticeNo" value="${noticeNo }">
 		<button id="" class="btn btn-outline-dark" style="float:right">수정</button>
 	</form>
-	<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${comment.getNoticeNo() }&currentPage=1" class="btn btn-outline-dark" style="float:left">뒤로</a>
+	<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${noticeNo }&currentPage=1" class="btn btn-outline-dark" style="float:left">뒤로</a>
 </div>
 </body>
 </html>

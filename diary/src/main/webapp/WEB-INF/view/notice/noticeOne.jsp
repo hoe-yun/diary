@@ -85,8 +85,8 @@
 				<td class="col-lg-1">${c.getMemberId() }</td>
 				<td class="col-lg-1">${c.getCreatedate() }</td>
 				<td class="col-lg-2">
-					<a href="${pageContext.request.contextPath}/comment/modifyComment?commentNo=${c.getCommentNo()}&noticeNo=${c.getNoticeNo()}" class="btn btn-outline-dark btn-light">수정</a> 
-					<a href="${pageContext.request.contextPath}/comment/removeComment?commentNo=${c.getCommentNo()}&noticeNo=${c.getNoticeNo()}" class="btn btn-outline-danger btn-light">삭제</a>
+					<a href="${pageContext.request.contextPath}/comment/modifyComment?commentNo=${c.getCommentNo()}&noticeNo=${paramNotice.getNoticeNo() }" class="btn btn-outline-dark btn-light">수정</a> 
+					<a href="${pageContext.request.contextPath}/comment/removeComment?commentNo=${c.getCommentNo()}&noticeNo=${paramNotice.getNoticeNo() }" class="btn btn-outline-danger btn-light">삭제</a>
 				</td>
 			</tr>
 			</c:forEach>

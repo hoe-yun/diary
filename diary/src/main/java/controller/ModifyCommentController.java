@@ -25,12 +25,12 @@ public class ModifyCommentController extends HttpServlet {
 			return;
 		}
 		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
-		
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		CommentDao commentDao = new CommentDao();
 		Comment comment = commentDao.selectComment(commentNo);
 		
 		request.setAttribute("comment", comment);
-		
+		request.setAttribute("noticeNo", noticeNo);
 		request.getRequestDispatcher("/WEB-INF/view/comment/modifyComment.jsp").forward(request, response);
 	}
 

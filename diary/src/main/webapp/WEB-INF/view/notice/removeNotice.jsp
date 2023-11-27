@@ -12,13 +12,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container"> 
 	<br><br><div align="center"><h1>공지 삭제</h1></div><br><br>
 	<form action="${pageContext.request.contextPath}/notice/removeNotice" method="post" id="">
 		<table class="table col-lg-12">
 			<tr align="center">
 				<th class="table-info"><br>공지 번호<br><br></th>
-				<td><br><input type="text" name="noticeNo" value="${noticeNo }" readonly="readonly"></td>
+				<td><br><input type="text" name="noticeNo" value="${noticeNo}" readonly="readonly"></td>
 			</tr>
 			<tr align="center">
 				<th class="table-info"><br>비밀 번호<br><br></th>

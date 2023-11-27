@@ -12,7 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<br><br>
+<br><div><h1> 접속자 수 : ${application.getAttribute("currentCnt") } 누적 접속자 수 : ${CntSum }</h1></div>
+
 	<div class="container">
 		<div align="center">
 			<table class="table table-bordered col-lg-12">

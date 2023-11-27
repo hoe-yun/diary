@@ -35,6 +35,7 @@ public class CounterDao {
 					WHERE cnt_date = CURDATE()
 					""";
 			stmt = conn.prepareStatement(sql);
+			
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				cnt.setCntNum(rs.getInt("cntNum"));
@@ -77,7 +78,7 @@ public class CounterDao {
 						CURDATE(),1)
 			""";
 			stmt = conn.prepareStatement(sql);
-			System.out.println(stmt + " <-- stmt");
+			System.out.println(stmt + " <-- 접속자 insert stmt");
 			row = stmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -113,7 +114,7 @@ public class CounterDao {
 						WHERE cnt_date = CURDATE()
 			""";
 			stmt = conn.prepareStatement(sql);
-			System.out.println(stmt + " <-- stmt");
+			System.out.println(stmt + " <-- 접속자 update stmt");
 			row = stmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

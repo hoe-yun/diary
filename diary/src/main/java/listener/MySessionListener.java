@@ -16,14 +16,16 @@ public class MySessionListener implements HttpSessionListener {
         // 현재 접속자
     	int n = (Integer)(se.getSession().getServletContext().getAttribute("currentCnt"));
     	se.getSession().getServletContext().setAttribute("currentCnt", n+1);
+    	System.out.println(se.getSession().getServletContext().getAttribute("currentCnt")+"<-- 접속자수 currentCnt");
     	//오늘 날짜의 누적 접속자
     	CounterDao counterDao = new CounterDao();
     	Counter counter = counterDao.selectCntByToday();
-    	if(counter == null) {	// 오늘 첫 접속
+    	if(counter.getCntDate() == null) {	// 오늘 첫 접속
     		counterDao.insertCnt();
     	}else {	// 이미 접속자가 있었음
     		counterDao.updateCnt();
     	}
+    	System.out.println("접속자 --->>"+counter.getCntNum() );
     }
 
 	

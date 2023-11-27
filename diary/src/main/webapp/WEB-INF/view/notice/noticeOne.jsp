@@ -81,12 +81,35 @@
 		<table class="table col-lg-12">
 			<c:forEach var="c" items="${commentList }">
 			<tr align="center">
-				<td class="col-lg-8">${c.getCommentContent() }</td>	
-				<td class="col-lg-1">${c.getMemberId() }</td>
-				<td class="col-lg-1">${c.getCreatedate() }</td>
+				<c:choose>
+					<c:when test="${c.getIsSecret() == true && loginId == c.getMemberId() }">
+						<td class="col-lg-8">${c.getCommentContent() }</td>	
+						<td class="col-lg-1">${c.getMemberId() }</td>
+						<td class="col-lg-1">${c.getCreatedate() }</td>
+					</c:when>
+					<c:when test="${c.getIsSecret() == true && loginLevel > 0 }">
+						<td class="col-lg-8">${c.getCommentContent() }</td>	
+						<td class="col-lg-1">${c.getMemberId() }</td>
+						<td class="col-lg-1">${c.getCreatedate() }</td>
+					</c:when>
+					<c:when test="${c.getIsSecret() == true && loginId != c.getMemberId() }">
+						<td class="col-lg-8">비밀글입니다.</td>	
+						<td class="col-lg-1">-</td>
+						<td class="col-lg-1">-</td>
+					</c:when>
+					<c:otherwise>
+						<td class="col-lg-8">${c.getCommentContent() }</td>	
+						<td class="col-lg-1">${c.getMemberId() }</td>
+						<td class="col-lg-1">${c.getCreatedate() }</td>
+					</c:otherwise>
+				</c:choose>
 				<td class="col-lg-2">
-					<a href="${pageContext.request.contextPath}/comment/modifyComment?commentNo=${c.getCommentNo()}&noticeNo=${paramNotice.getNoticeNo() }" class="btn btn-outline-dark btn-light">수정</a> 
-					<a href="${pageContext.request.contextPath}/comment/removeComment?commentNo=${c.getCommentNo()}&noticeNo=${paramNotice.getNoticeNo() }" class="btn btn-outline-danger btn-light">삭제</a>
+					<c:if test="${loginId == c.getMemberId() }">
+						<a href="${pageContext.request.contextPath}/comment/modifyComment?commentNo=${c.getCommentNo()}&noticeNo=${paramNotice.getNoticeNo() }" class="btn btn-outline-dark btn-light">수정</a> 
+					</c:if>
+					<c:if test="${loginId == c.getMemberId() || loginLevel > 0}">
+						<a href="${pageContext.request.contextPath}/comment/removeComment?commentNo=${c.getCommentNo()}&noticeNo=${paramNotice.getNoticeNo() }" class="btn btn-outline-danger btn-light">삭제</a>
+					</c:if>
 				</td>
 			</tr>
 			</c:forEach>

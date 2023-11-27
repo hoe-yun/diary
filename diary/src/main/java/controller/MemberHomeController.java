@@ -85,6 +85,9 @@ public class MemberHomeController extends HttpServlet {
 		String paramMemberId = paramMember.getMemberId();
 		List<Map<String, Object>> list = scheduleDao.selelctScheduleByMonth(paramMemberId,targetY ,targetM );
 		System.out.println(list.size()+"<--");
+		
+		CounterDao counterDao = new CounterDao();
+		int CntSum = counterDao.selectCntSum();
 		request.setAttribute("targetY", targetY);
 		request.setAttribute("targetM", targetM);
 		request.setAttribute("lastD", lastD);
@@ -97,6 +100,7 @@ public class MemberHomeController extends HttpServlet {
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("lastPage", lastPage);
 		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("CntSum", CntSum);
 		request.getRequestDispatcher("/WEB-INF/view/member/memberHome.jsp").forward(request, response);
 	}
 

@@ -84,6 +84,7 @@ public class NoticeOneController extends HttpServlet {
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("paramNotice", paramNotice);
 		request.setAttribute("loginLevel", loginLevel);
+		request.setAttribute("loginId", loginId);
 		request.setAttribute("currentCommentPage", currentCommentPage);
 		request.setAttribute("lastCommentPage", lastCommentPage);
 		request.setAttribute("commentList", commentList);

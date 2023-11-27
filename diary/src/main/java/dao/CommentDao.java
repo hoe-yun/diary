@@ -158,7 +158,7 @@ public class CommentDao {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, comment.getCommentContent());
 			stmt.setString(2, comment.getIsSecret());
-			stmt.setInt(3, comment.getNoticeNo());
+			stmt.setInt(3, comment.getCommentNo());
 			stmt.setString(4, comment.getMemberId());
 			System.out.println(stmt + " <-- stmt");
 			row = stmt.executeUpdate();

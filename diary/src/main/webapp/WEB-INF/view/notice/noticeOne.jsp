@@ -59,10 +59,10 @@
 		<div align="right">
 			<h5>작성일 : ${paramNotice.getCreatedate() }</h5>
 		</div>
-	</fieldset><br><br><br><br><br><br>
+	</fieldset><br><br><br>
 	<div align="center">
 		<h3>${paramNotice.getNoticeContent() }</h3>
-	</div><br><br><br><br><br><br>
+	</div><br><br><br>
 	<fieldset class="border" style="background-color:#D4F4FA">
 		<br>
 		<div>
@@ -76,6 +76,42 @@
 			<h5>작성자 : ${paramNotice.getMemberId() }</h5>
 		</div>
 	</fieldset>
+	<div align="center">
+		<br><h3>코멘트</h3><br>
+		<table class="table col-lg-12">
+			<c:forEach var="c" items="${commentList }">
+			<tr align="center">
+				<td class="col-lg-8">${c.getCommentContent() }</td>	
+				<td class="col-lg-1">${c.getMemberId() }</td>
+				<td class="col-lg-1">${c.getCreatedate() }</td>
+				<td class="col-lg-2">
+					<a href="${pageContext.request.contextPath}/comment/modifyComment?commentNo=${c.getCommentNo()}&noticeNo=${c.getNoticeNo()}" class="btn btn-outline-dark btn-light">수정</a> 
+					<a href="${pageContext.request.contextPath}/comment/removeComment?commentNo=${c.getCommentNo()}&noticeNo=${c.getNoticeNo()}" class="btn btn-outline-danger btn-light">삭제</a>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+	</div><br><br><br>
+	<div align="center">	
+		<form action="${pageContext.request.contextPath}/comment/addComment" method="post" id="">
+			<input type="hidden" name="noticeNo" value="${paramNotice.getNoticeNo() }">
+			<table>
+				<tr>
+					<td>
+						<textarea id="" name="commentContent" rows="1" cols="50"></textarea>
+						&nbsp;&nbsp;&nbsp;
+						<select name="isSecret">
+							<option value="false">공개글
+							<option value="true">비밀글
+						</select>
+						&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-outline-dark btn-light" style="float:right">추가</button>
+					</td>
+				</tr>
+			</table>
+			
+		</form>
+	</div>
 </div>
 </body>
 </html>

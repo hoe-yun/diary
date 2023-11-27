@@ -16,6 +16,8 @@ import vo.Member;
 public class LoginMemberController extends HttpServlet {
 	//로그인 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("로그인멤버 실행");
+		
 		// session 유효성 검사
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") != null) {

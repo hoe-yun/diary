@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CommentDao;
 import dao.NoticeDao;
+import vo.Comment;
 import vo.Member;
 import vo.Notice;
 
@@ -58,11 +60,34 @@ public class NoticeOneController extends HttpServlet {
 		System.out.println(loginLevel + " <---level @@");
 		System.out.println(loginId + " <---loginId @@");
 		
+		//코멘트 출력 모델
+		int currentCommentPage = 1;
+		if(request.getParameter("currentCommentPage") != null){
+			currentCommentPage = Integer.parseInt(request.getParameter("currentCommentPage"));
+		}
+		int rowPerCommentPage = 3;
+		int beginCommentRow = (currentCommentPage-1)*rowPerCommentPage;
+		CommentDao commentDao = new CommentDao();
+		int totalComment = commentDao.commentCnt(noticeNo);
+		int lastCommentPage = totalComment / rowPerCommentPage;
+		if((totalComment % rowPerCommentPage) != 0 ) {
+			lastCommentPage = lastCommentPage + 1;
+		}
+		Map<String, Object> commentMap = new HashMap<>();
+		commentMap.put("beginCommentRow", beginCommentRow);
+		commentMap.put("rowPerCommentPage", rowPerCommentPage);
+		commentMap.put("noticeNo", noticeNo);
+		List<Comment> commentList = commentDao.selectCommentList(commentMap);
+		
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("lastPage", lastPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("paramNotice", paramNotice);
 		request.setAttribute("loginLevel", loginLevel);
+		request.setAttribute("currentCommentPage", currentCommentPage);
+		request.setAttribute("lastCommentPage", lastCommentPage);
+		request.setAttribute("commentList", commentList);
+		
 		request.getRequestDispatcher("/WEB-INF/view/notice/noticeOne.jsp").forward(request, response);
 		
 	}

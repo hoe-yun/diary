@@ -41,7 +41,7 @@ public class CommentDao {
 			stmt.setInt(1, comment.getNoticeNo());
 			stmt.setString(2, comment.getMemberId());
 			stmt.setString(3, comment.getCommentContent());
-			stmt.setBoolean(4, comment.getIsSecret());
+			stmt.setString(4, comment.getIsSecret());
 			System.out.println(stmt + " <-- stmt");
 			row = stmt.executeUpdate();
 			if(row != 0) {
@@ -157,7 +157,7 @@ public class CommentDao {
 			""";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, comment.getCommentContent());
-			stmt.setBoolean(2, comment.getIsSecret());
+			stmt.setString(2, comment.getIsSecret());
 			stmt.setInt(3, comment.getNoticeNo());
 			stmt.setString(4, comment.getMemberId());
 			System.out.println(stmt + " <-- stmt");
@@ -209,8 +209,9 @@ public class CommentDao {
 					""";
 			stmt= conn.prepareStatement(sql);
 			stmt.setObject(1, paramMap.get("noticeNo"));
-			stmt.setObject(2, paramMap.get("beginRow"));
-			stmt.setObject(3, paramMap.get("rowPerpage"));
+			stmt.setObject(2, paramMap.get("beginCommentRow"));
+			stmt.setObject(3, paramMap.get("rowPerCommentPage"));
+			System.out.println(stmt + "  <---stmt CommentList");
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Comment c = new Comment();
@@ -219,7 +220,7 @@ public class CommentDao {
 				c.setMemberId(rs.getString("memberId"));
 				c.setCommentContent(rs.getString("commentContent"));
 				c.setCreatedate(rs.getString("createdate"));
-				c.setIsSecret(rs.getBoolean("isSecret"));
+				c.setIsSecret(rs.getString("isSecret"));
 				list.add(c);
 			}
 		}catch(Exception e) {
@@ -234,5 +235,85 @@ public class CommentDao {
 			}
 		}
 		return list;
+	}
+	public int commentCnt(int noticeNo) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			//톰캣 context.xml 설정 로드
+			Context context = new InitialContext();
+			//context.xml 커넥션 풀 객체 로드
+			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/diary");
+			conn = ds.getConnection();
+			//conn 디버깅
+			System.out.println(conn+" <--conn");
+			
+			String sql = """
+					SELECT COUNT(*)
+					FROM comment
+					WHERE notice_no = ?
+					""";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, noticeNo);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				row = rs.getInt("COUNT(*)");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	public Comment selectComment(int commentNo) {
+		Comment comment = new Comment();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			//톰캣 context.xml 설정 로드
+			Context context = new InitialContext();
+			//context.xml 커넥션 풀 객체 로드
+			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/diary");
+			conn = ds.getConnection();
+			//conn 디버깅
+			System.out.println(conn+" <--conn");
+			
+			String sql = """
+					SELECT comment_no commentNo,
+							comment_content commentContent,
+							is_secret isSecret
+					FROM comment
+					WHERE comment_no = ?
+					""";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, commentNo);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				comment.setCommentNo(rs.getInt("commentNo"));
+				comment.setCommentContent(rs.getString("commentContent"));
+				comment.setIsSecret(rs.getString("isSecret"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return comment;
 	}
 }

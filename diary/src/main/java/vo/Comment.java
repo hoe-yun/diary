@@ -3,7 +3,7 @@ package vo;
 //notice 댓글
 public class Comment {
 	//fk : notice_no, member_id
-	private boolean isSecret; // 값이 true이면 비밀 글(본인과 관리자만 볼 수 있게), false면 일반 글
+	private String isSecret; // 값이 true이면 비밀 글(본인과 관리자만 볼 수 있게), false면 일반 글
 	private int commentNo;
 	private int noticeNo;
 	private String memberId;
@@ -15,10 +15,10 @@ public class Comment {
 	public void setCommentNo(int commentNo) {
 		this.commentNo = commentNo;
 	}
-	public boolean getIsSecret() {
+	public String getIsSecret() {
 		return isSecret;
 	}
-	public void setIsSecret(boolean isSecret) {
+	public void setIsSecret(String isSecret) {
 		this.isSecret = isSecret;
 	}
 	public int getNoticeNo() {

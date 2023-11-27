@@ -5,24 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="container">
-	<div align="center"><h1>공지 삭제</h1></div>
+	<br><br><div align="center"><h1>공지 삭제</h1></div><br><br>
 	<form action="${pageContext.request.contextPath}/notice/removeNotice" method="post" id="">
-		<table>
-			<tr>
-				<th>공지 번호</th>
-				<td><input type="text" name="noticeNo" value="${noticeNo }" readonly="readonly"></td>
+		<table class="table col-lg-12">
+			<tr align="center">
+				<th class="table-info"><br>공지 번호<br><br></th>
+				<td><br><input type="text" name="noticeNo" value="${noticeNo }" readonly="readonly"></td>
 			</tr>
-			<tr>
-				<th>비밀 번호</th>
-				<td><input type="password" name="noticePw"></td>
+			<tr align="center">
+				<th class="table-info"><br>비밀 번호<br><br></th>
+				<td><br><input type="password" name="noticePw"></td>
 			</tr>
 		</table>
-		<button type="submit" id="">삭제</button>
+		<button type="submit" id="" class="btn btn-outline-danger" style="float:right">삭제</button>
 	</form>
-	<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${paramNotice.getNoticeNo() }&currentPage=1" class="btn btn-outline-dark" style="float:left">뒤로</a>
+	<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${noticeNo }&currentPage=1" class="btn btn-outline-dark" style="float:left">뒤로</a>
 </div>
 </body>
 </html>

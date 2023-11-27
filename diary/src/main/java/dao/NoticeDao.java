@@ -334,7 +334,7 @@ public class NoticeDao {
 				stmt.close();
 				conn.close();
 			}catch(Exception e) {
-				
+				e.printStackTrace();
 			}
 		}
 		return row;

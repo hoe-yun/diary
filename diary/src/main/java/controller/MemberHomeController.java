@@ -88,6 +88,10 @@ public class MemberHomeController extends HttpServlet {
 		
 		CounterDao counterDao = new CounterDao();
 		int CntSum = counterDao.selectCntSum();
+		
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		int loginLevel = loginMember.getMemberLevel();
+		
 		request.setAttribute("targetY", targetY);
 		request.setAttribute("targetM", targetM);
 		request.setAttribute("lastD", lastD);
@@ -96,7 +100,7 @@ public class MemberHomeController extends HttpServlet {
 		request.setAttribute("totalTd", totalTd);
 		
 		request.setAttribute("list", list);
-		
+		request.setAttribute("loginLevel", loginLevel);
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("lastPage", lastPage);
 		request.setAttribute("currentPage", currentPage);

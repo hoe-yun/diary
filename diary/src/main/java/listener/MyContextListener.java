@@ -16,7 +16,7 @@ public class MyContextListener implements ServletContextListener {
 	
     public void contextInitialized(ServletContextEvent sce)  { 
     	//application.setAttribute()
-         sce.getServletContext().setAttribute("currentCnt", 0);
+         sce.getServletContext().setAttribute("currentCnt", 1);
          System.out.println("MyContextListener currentCnt ->"+sce.getServletContext().getAttribute("currentCnt"));
     }
 	

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -38,14 +39,14 @@
 	<div align="center">
 		<fieldset class="border" style="background-color:#D4F4FA">
 			<legend class="float-none w-auto p-2" align="center">스케줄 추가</legend>
-				<form action="${pageContext.request.contextPath}/schedule/addSchedule" method="post" id="">
+				<form action="${pageContext.request.contextPath}/schedule/addSchedule" method="post" id="form">
 					<input type="hidden" name="year" value="${targetY }">
 					<input type="hidden" name="month" value="${targetM }">
 					<input type="hidden" name="day" value="${targetD }">
 					<table>
 						<tr>
 							<td>
-								<textarea id="" name="memo" rows="1" cols="50"></textarea>
+								<textarea id="memo" name="memo" rows="1" cols="50"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -53,7 +54,7 @@
 								<input type="radio" name="emoji" value="&#1F4DD;"><span>&#128110;</span>
 								<input type="radio" name="emoji" value="&#128186;">&#128186;
 								<input type="radio" name="emoji" value="&#127981;">&#127981;
-								<button class="btn btn-outline-dark btn-light" style="float:right;">추가</button>
+								<button id="formBtn" class="btn btn-outline-dark btn-light" style="float:right;">추가</button>
 							</td>
 						</tr>
 					</table>
@@ -62,4 +63,13 @@
 	</div>
 </div>
 </body>
+<script type="text/javascript">
+	$('#formBtn').click(function(){
+		if($('#memo').val().length < 0){
+			alert('스케줄 내용을 입력해주세요');
+		}else{
+			$('#form').submit();
+		}
+	})
+</script>
 </html>

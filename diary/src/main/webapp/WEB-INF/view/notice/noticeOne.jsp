@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Latest compiled and minified CSS -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Latest compiled JavaScript -->
@@ -121,14 +122,14 @@
 			<table>
 				<tr>
 					<td>
-						<textarea id="" name="commentContent" rows="1" cols="50"></textarea>
+						<textarea id="commentContent" name="commentContent" rows="1" cols="50"></textarea>
 						&nbsp;&nbsp;&nbsp;
 						<select name="isSecret">
 							<option value="false">공개글
 							<option value="true">비밀글
 						</select>
 						&nbsp;&nbsp;&nbsp;
-						<button class="btn btn-outline-dark btn-light" style="float:right">추가</button>
+						<button id="addBtn" class="btn btn-outline-dark btn-light" style="float:right">추가</button>
 					</td>
 				</tr>
 			</table>
@@ -137,4 +138,11 @@
 	</div>
 </div>
 </body>
+<script type="text/javascript">
+	$('#addBtn').click(function(){
+		if($('#commentContent').val().length < 0){
+			alert('코멘트를 입력하세요');
+		}
+	})
+</script>
 </html>
